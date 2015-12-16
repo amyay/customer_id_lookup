@@ -1,0 +1,19 @@
+<form id="task-form">
+  <label>CustomerID:</label>
+  <input type="text" id="customerID" size="10" />
+  <button id="my-btn" class="btn-small btn-primary" />Hent data</button>
+</form>
+
+  <div class="searchresults">
+    <ul>
+      <li>
+        <p class="customerName">{{customerName}}</p>
+        <p class="customerEmail">{{customerEmail}}</p>
+        <p class="customerMobile">{{{customerMobile}}}</p>
+        <p class="customerStreetAddress">{{{customerStreetAddress}}}</p>
+        <p class="customerZipCode">{{{customerZipCode}}}</p>
+        <p class="customerCity">{{{customerCity}}}</p>
+        <p />
+      </li>
+    </ul>
+  </div>

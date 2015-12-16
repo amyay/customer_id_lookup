@@ -1,9 +1,65 @@
 {
   "name": "Hent kundedata",
   "author": {
-    "name": "Get",
-    "email": "andreas.karlsen@get.no"
+    "name" :"Zendesk Services",
+    "email": "services@zendesk.com"
   },
+  "parameters": [
+    {
+      "name": "KundeID",
+      "type": "text",
+      "required": true,
+      "default": "24661362"
+    },
+    {
+      "name": "Kundenavn",
+      "type": "text",
+      "required": true,
+      "default": "24674569"
+    },
+    {
+      "name": "Gateadresse",
+      "type": "text",
+      "required": true,
+      "default": "24674579"
+    },
+    {
+      "name": "Postnummer",
+      "type": "text",
+      "required": true,
+      "default": "24674589"
+    },
+    {
+      "name": "Poststed",
+      "type": "text",
+      "required": true,
+      "default": "24724695"
+    },
+    {
+      "name": "epost",
+      "type": "text",
+      "required": true,
+      "default": "24724705"
+    },
+    {
+      "name": "Mobil",
+      "type": "text",
+      "required": true,
+      "default": "24674599"
+    },
+    {
+      "name": "Hub",
+      "type": "text",
+      "required": true,
+      "default": "24654099"
+    },
+    {
+      "name": "Node",
+      "type": "text",
+      "required": true,
+      "default": "24654109"
+    }
+  ],
   "defaultLocale": "en",
   "private": true,
   "location": ["ticket_sidebar", "new_ticket_sidebar"],

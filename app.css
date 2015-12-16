@@ -13,7 +13,7 @@ label {
  }
 
  ul {
-   list-style-type: circle;
+   list-style-type: none;
    padding-top: 8px;
    padding-bottom: 8px;
  }
