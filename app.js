@@ -36,6 +36,7 @@
     // global variables
     CustomFieldIDs: [],
     CustomerList: [],
+    thereAreNulls: [undefined, null, '', '-'],
 
     requests:
     {
@@ -161,9 +162,8 @@ console.log ('currentCustomerIndex =', this.currentCustomerIndex);
     },
 
     copyCustomerData: function() {
-
       // update the fields with dummy data
-      if (this.ticket().customField(this.KundeID) === "" || this.ticket().customField(this.KundeID) === undefined)
+      if (_.indexOf(this.thereAreNulls, this.ticket().customField(this.KundeID)) !== -1)
       {
         this.ticket().customField(this.KundeID, this.CustomerList[this.currentCustomerIndex].KundeID);
 
@@ -172,48 +172,46 @@ console.log ('currentCustomerIndex =', this.currentCustomerIndex);
           email: this.CustomerList[this.currentCustomerIndex].epost,
           name: this.CustomerList[this.currentCustomerIndex].Kundenavn
         });
-      }
 
-      if (this.ticket().customField(this.Kundenavn) === "" || this.ticket().customField(this.Kundenavn) === undefined)
-      {
-        this.ticket().customField(this.Kundenavn, this.CustomerList[this.currentCustomerIndex].Kundenavn);
-      }
+        // continue to do add the rest of the fields
+        if (_.indexOf(this.thereAreNulls, this.ticket().customField(this.Kundenavn)) !== -1)
+        {
+          this.ticket().customField(this.Kundenavn, this.CustomerList[this.currentCustomerIndex].Kundenavn);
+        }
 
-      if (this.ticket().customField(this.Gateadresse) === "" || this.ticket().customField(this.Gateadresse) === undefined)
-      {
-        this.ticket().customField(this.Gateadresse, this.CustomerList[this.currentCustomerIndex].Gateadresse);
+        if (_.indexOf(this.thereAreNulls, this.ticket().customField(this.Gateadresse)) !== -1)
+        {
+          this.ticket().customField(this.Gateadresse, this.CustomerList[this.currentCustomerIndex].Gateadresse);
+        }
+        if (_.indexOf(this.thereAreNulls, this.ticket().customField(this.Postnummer)) !== -1)
+        {
+          this.ticket().customField(this.Postnummer, this.CustomerList[this.currentCustomerIndex].Postnummer);
+        }
+        if (_.indexOf(this.thereAreNulls, this.ticket().customField(this.Poststed)) !== -1)
+        {
+          this.ticket().customField(this.Poststed, this.CustomerList[this.currentCustomerIndex].Poststed);
+        }
+        if (_.indexOf(this.thereAreNulls, this.ticket().customField(this.epost)) !== -1)
+        {
+          this.ticket().customField(this.epost, this.CustomerList[this.currentCustomerIndex].epost);
+        }
+        if (_.indexOf(this.thereAreNulls, this.ticket().customField(this.Mobil)) !== -1)
+        {
+          this.ticket().customField(this.Mobil, this.CustomerList[this.currentCustomerIndex].Mobil);
+        }
+        if (_.indexOf(this.thereAreNulls, this.ticket().customField(this.Hub)) !== -1)
+        {
+          this.ticket().customField(this.Hub, this.CustomerList[this.currentCustomerIndex].Hub);
+        }
+        if (_.indexOf(this.thereAreNulls, this.ticket().customField(this.Node)) !== -1)
+        {
+          this.ticket().customField(this.Node, this.CustomerList[this.currentCustomerIndex].Node);
+        }
       }
-
-      if (this.ticket().customField(this.Postnummer) === "" || this.ticket().customField(this.Postnummer) === undefined)
-      {
-        this.ticket().customField(this.Postnummer, this.CustomerList[this.currentCustomerIndex].Postnummer);
+      else {
+        // field already defined. do not do anything
+console.log ('in copyCustomerData(): fields already defined. not copying...');
       }
-
-      if (this.ticket().customField(this.Poststed) === "" || this.ticket().customField(this.Poststed) === undefined)
-      {
-        this.ticket().customField(this.Poststed, this.CustomerList[this.currentCustomerIndex].Poststed);
-      }
-
-      if (this.ticket().customField(this.epost) === "" || this.ticket().customField(this.epost) === undefined)
-      {
-        this.ticket().customField(this.epost, this.CustomerList[this.currentCustomerIndex].epost);
-      }
-
-      if (this.ticket().customField(this.Mobil) === "" || this.ticket().customField(this.Mobil) === undefined)
-      {
-        this.ticket().customField(this.Mobil, this.CustomerList[this.currentCustomerIndex].Mobil);
-      }
-
-      if (this.ticket().customField(this.Hub) === "" || this.ticket().customField(this.Hub) === undefined)
-      {
-        this.ticket().customField(this.Hub, this.CustomerList[this.currentCustomerIndex].Hub);
-      }
-
-      if (this.ticket().customField(this.Node) === "" || this.ticket().customField(this.Node) === undefined)
-      {
-        this.ticket().customField(this.Node, this.CustomerList[this.currentCustomerIndex].Node);
-      }
-
     },
 
 
