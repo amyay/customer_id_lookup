@@ -10,7 +10,5 @@
   <span class="left"><input type="text" id="customerID" size="25" /></span>
   <span class="right"><button id="download_data" class="btn-small btn-primary">Hent data</button></span>
 </section>
-<br />
-<br />
 <hr />
 <font color=c0c0c0>Test av posting av kundedata.</font>

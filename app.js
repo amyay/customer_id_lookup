@@ -22,6 +22,16 @@
     dummyHub2: '33333',
     dummyNode2: '55555',
 
+    dummyKundeID3: '55502228',
+    dummyKundenavn3: 'John Doe',
+    dummyGateadresse3: '456 Someother Avenue',
+    dummyPostnummer3: '99471',
+    dummyPoststed3: 'Citti',
+    dummyepost3: 'john.doe@gmail.com',
+    dummyMobil3: '7638450522',
+    dummyHub3: '99999',
+    dummyNode3: '88888',
+
 
     // global variables
     CustomFieldIDs: [],
@@ -69,13 +79,17 @@
     // },
 
     validateForm: function(event) {
+
+      // initialize index
+      this.currentCustomerIndex = 0;
+
       event.preventDefault();
       var name = this.$('#customerID')[0];
       if (name.value.length < 8) {
         services.notify('Fyll inn gyldig kundenummer.', 'error');
       }
       else {                  // good to go
-        console.log("in validateForm: in else");
+        // console.log("in validateForm: in else");
         this.sendFormData();
       }
     },
@@ -115,16 +129,20 @@ console.log ('currentCustomerIndex =', this.currentCustomerIndex);
         customerZipCode: this.CustomerList[this.currentCustomerIndex].Postnummer,
         customerCity: this.CustomerList[this.currentCustomerIndex].Poststed,
         customerHub: this.CustomerList[this.currentCustomerIndex].Hub,
-        customerNode: this.CustomerList[this.currentCustomerIndex].Node
+        customerNode: this.CustomerList[this.currentCustomerIndex].Node,
+        current_customer_index: this.currentCustomerIndex+1,
+        number_of_results: this.CustomerList.length
       });
 
       // hide buttons accordingly
       if (this.currentCustomerIndex === 0) {
         this.$('.btn_prev').css('visibility', 'hidden');
+        // this.$('.btn_prev').attr('disabled','disabled');
       }
 
       if (this.currentCustomerIndex == this.CustomerList.length-1) {
         this.$('.btn_next').css('visibility', 'hidden');
+        // this.$('.btn_next').attr('disabled','disabled');
       }
     },
 
@@ -244,7 +262,7 @@ console.log ('currentCustomerIndex =', this.currentCustomerIndex);
       this.CustomFieldIDs.push(this.settings.Hub);
       this.CustomFieldIDs.push(this.settings.Node);
 
-      console.log ("in init, CustomFieldIDs: ", this.CustomFieldIDs);
+console.log ("in init, CustomFieldIDs: ", this.CustomFieldIDs);
 
       // check to see if fields are defined
       for (var i = 0; i < this.CustomFieldIDs.length; i++) {
@@ -266,7 +284,7 @@ console.log ('currentCustomerIndex =', this.currentCustomerIndex);
       this.ticketFields(this.Node).disable();
 
       // doing it the dumb way
-      // push 2 sets of dummy data into customer list
+      // push 3 sets of dummy data into customer list
 
       var customerObject = {
         "KundeID"       : this.dummyKundeID,
@@ -294,10 +312,22 @@ console.log ('currentCustomerIndex =', this.currentCustomerIndex);
         "Node"          : this.dummyNode2
       };
       this.CustomerList.push(customerObject);
-console.log('CustomerList', this.CustomerList);
 
-      // initialize index
-      this.currentCustomerIndex = 0;
+      customerObject = {
+        "KundeID"       : this.dummyKundeID3,
+        "Kundenavn"     : this.dummyKundenavn3,
+        "Gateadresse"   : this.dummyGateadresse3,
+        "Postnummer"    : this.dummyPostnummer3,
+        "Poststed"      : this.dummyPoststed3,
+        "epost"         : this.dummyepost3,
+        "Mobil"         : this.dummyMobil3,
+        "Hub"           : this.dummyHub3,
+        "Node"          : this.dummyNode3
+      };
+      this.CustomerList.push(customerObject);
+
+
+console.log('CustomerList', this.CustomerList);
 
       // this.switchTo('taskform');
     }
