@@ -1,0 +1,5 @@
+<form id="task-form">
+  <label>CustomerID:</label>
+  <input type="text" id="name" size="10" />
+  <button id="my-btn" class="btn-small btn-primary" />Hent data</button>
+</form>

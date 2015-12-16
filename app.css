@@ -1,0 +1,23 @@
+.hellotext {
+  text-align: center;
+}
+
+label {
+   padding-top: 8px;
+   font-size: 105%;
+   font-weight: bold;
+ }
+
+ button {
+   font-size: 110%;
+ }
+
+ ul {
+   list-style-type: circle;
+   padding-top: 8px;
+   padding-bottom: 8px;
+ }
+
+ .help-block {
+   font-size: 95%;
+ }

@@ -1,0 +1,9 @@
+<header>
+  <span class="logo"/>
+
+<h3>{{setting "name"}}</h3>
+
+</header>
+<section data-main/>
+
+<font color=c0c0c0>Test av posting av kundedata.</font>

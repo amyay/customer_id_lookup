@@ -1,0 +1,11 @@
+{
+  "name": "Hent kundedata",
+  "author": {
+    "name": "Get",
+    "email": "andreas.karlsen@get.no"
+  },
+  "defaultLocale": "en",
+  "private": true,
+  "location": ["ticket_sidebar", "new_ticket_sidebar"],
+  "frameworkVersion": "1.0"
+}
