@@ -1,19 +1,30 @@
 <form id="task-form">
   <label>CustomerID:</label>
-  <input type="text" id="customerID" size="10" />
-  <button id="my-btn" class="btn-small btn-primary" />Hent data</button>
+  <br />
+  <span class="left"><input type="text" id="customerID" size="25" /></span>
+  <span class="right"><button id="download_data" class="btn-small btn-primary">Hent data</button></span>
 </form>
 
   <div class="searchresults">
     <ul>
       <li>
+        <p class="customerID">{{customerID}}</p>
         <p class="customerName">{{customerName}}</p>
         <p class="customerEmail">{{customerEmail}}</p>
         <p class="customerMobile">{{{customerMobile}}}</p>
         <p class="customerStreetAddress">{{{customerStreetAddress}}}</p>
         <p class="customerZipCode">{{{customerZipCode}}}</p>
         <p class="customerCity">{{{customerCity}}}</p>
+        <p class="customerHub">{{{customerHub}}}</p>
+        <p class="customerNode">{{{customerNode}}}</p>
         <p />
       </li>
     </ul>
+    <div><button class="btn_copy_customer_data">copy customer data</button></div>
   </div>
+<br />
+  <p>
+    <span class="left"><button class="btn_prev">previous</button></span>
+    <b>{{number_of_results}}</b>
+    <span class="right"><button class="btn_next">next</button></span>
+  </p>

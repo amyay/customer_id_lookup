@@ -2,7 +2,7 @@
   return {
 
     // dummy data
-    //dummyKundeID: ,
+    dummyKundeID: '69034202',
     dummyKundenavn: 'Kunt Egner',
     dummyGateadresse: 'Nordheimbakken 13A',
     dummyPostnummer: '0378',
@@ -12,8 +12,20 @@
     dummyHub: '12345',
     dummyNode: '12345',
 
+    dummyKundeID2: '25729402',
+    dummyKundenavn2: 'Dummy Person',
+    dummyGateadresse2: '123 Some Street',
+    dummyPostnummer2: '87654',
+    dummyPoststed2: 'Sity',
+    dummyepost2: 'dummy.person@gmail.com',
+    dummyMobil2: '58592323334',
+    dummyHub2: '33333',
+    dummyNode2: '55555',
+
+
     // global variables
     CustomFieldIDs: [],
+    CustomerList: [],
 
     requests:
     {
@@ -32,10 +44,14 @@
 
     events:
     {
-      'app.activated': 'init',
+      'app.activated'                           : 'init',
       // 'taskPost.fail': 'notifyError',
       // 'taskPost.done': 'UpdateCustField',
-      'click #my-btn': 'validateForm'
+      'click #download_data'                    : 'validateForm',
+      'click .btn_copy_customer_data'           : 'copyCustomerData',
+      'click .btn_prev'                         : 'displayPreviousCustomerData',
+      'click .btn_next'                         : 'displayNextCustomerData'
+
     },
 
     // notifyError: function() {
@@ -52,75 +68,6 @@
     //   }
     // },
 
-    UpdateCustField_dummy: function() {
-
-      // update the fields with dummy data
-      if (this.ticket().customField(this.KundeID) === "" || this.ticket().customField(this.KundeID) === undefined)
-      {
-        this.ticket().customField(this.KundeID, this.$('#customerID').val());
-      }
-
-      if (this.ticket().customField(this.Kundenavn) === "" || this.ticket().customField(this.Kundenavn) === undefined)
-      {
-        this.ticket().customField(this.Kundenavn, this.dummyKundenavn);
-      }
-
-      if (this.ticket().customField(this.Gateadresse) === "" || this.ticket().customField(this.Ga) === undefined)
-      {
-        this.ticket().customField(this.Gateadresse, this.dummyGateadresse);
-      }
-
-      if (this.ticket().customField(this.Postnummer) === "" || this.ticket().customField(this.Postn) === undefined)
-      {
-        this.ticket().customField(this.Postnummer, this.dummyPostnummer);
-      }
-
-      if (this.ticket().customField(this.Poststed) === "" || this.ticket().customField(this.Poststed) === undefined)
-      {
-        this.ticket().customField(this.Poststed, this.dummyPoststed);
-      }
-
-      if (this.ticket().customField(this.epost) === "" || this.ticket().customField(this.epost) === undefined)
-      {
-        this.ticket().customField(this.epost, this.dummyepost);
-      }
-
-      if (this.ticket().customField(this.Mobil) === "" || this.ticket().customField(this.Mobil) === undefined)
-      {
-        this.ticket().customField(this.Mobil, this.dummyMobil);
-      }
-
-      if (this.ticket().customField(this.Hub) === "" || this.ticket().customField(this.Hub) === undefined)
-      {
-        this.ticket().customField(this.Hub, this.dummyHub);
-      }
-
-      if (this.ticket().customField(this.Node) === "" || this.ticket().customField(this.Node) === undefined)
-      {
-        this.ticket().customField(this.Node, this.dummyNode);
-      }
-
-      this.switchTo('customer_search_results', {
-        customerName: this.dummyKundenavn,
-        customerEmail: this.dummyepost,
-        customerMobile: this.dummyMobil,
-        customerStreetAddress: this.dummyGateadresse,
-        customerZipCode: this.dummyPostnummer,
-        customerCity: this.dummyPoststed
-      });
-    },
-
-    sendFormData: function() {
-      var new_task = {
-        data: {
-          customerid: this.$('#customerID').val()
-        }
-      };
-      //this.ajax('taskPost', new_task);
-      // hack : show update fields
-      this.UpdateCustField_dummy();
-    },
-
     validateForm: function(event) {
       event.preventDefault();
       var name = this.$('#customerID')[0];
@@ -132,6 +79,125 @@
         this.sendFormData();
       }
     },
+
+    sendFormData: function() {
+      var new_task = {
+        data: {
+          customerid: this.$('#customerID').val()
+        }
+      };
+      //this.ajax('taskPost', new_task);
+      // hack : show update fields
+      this.displayCustomerData();
+    },
+
+    displayCustomerData: function() {
+console.log ('in displaycustomerdata()');
+console.log ('currentCustomerIndex =', this.currentCustomerIndex);
+
+      this.currentcustomerID = '';
+      this.currentcustomerName = '';
+      this.currentcustomerEmail = '';
+      this.currentcustomerMobile = '';
+      this.currentcustomerStreetAddress = '';
+      this.currentcustomerZipCode = '';
+      this.currentcustomerCity = '';
+      this.currentcustomerHub = '';
+      this.currentcustomerNode = '';
+
+      // display search results
+      this.switchTo('customer_search_results', {
+        customerID: this.CustomerList[this.currentCustomerIndex].KundeID,
+        customerName: this.CustomerList[this.currentCustomerIndex].Kundenavn,
+        customerEmail: this.CustomerList[this.currentCustomerIndex].epost,
+        customerMobile: this.CustomerList[this.currentCustomerIndex].Mobil,
+        customerStreetAddress: this.CustomerList[this.currentCustomerIndex].Gateadresse,
+        customerZipCode: this.CustomerList[this.currentCustomerIndex].Postnummer,
+        customerCity: this.CustomerList[this.currentCustomerIndex].Poststed,
+        customerHub: this.CustomerList[this.currentCustomerIndex].Hub,
+        customerNode: this.CustomerList[this.currentCustomerIndex].Node
+      });
+
+      // hide buttons accordingly
+      if (this.currentCustomerIndex === 0) {
+        this.$('.btn_prev').css('visibility', 'hidden');
+      }
+
+      if (this.currentCustomerIndex == this.CustomerList.length-1) {
+        this.$('.btn_next').css('visibility', 'hidden');
+      }
+    },
+
+    displayPreviousCustomerData: function() {
+      if (this.currentCustomerIndex > 0) {
+        this.currentCustomerIndex --;
+      }
+      this.displayCustomerData();
+    },
+
+    displayNextCustomerData: function() {
+      if (this.currentCustomerIndex < this.CustomerList.length-1) {
+        this.currentCustomerIndex ++;
+      }
+      this.displayCustomerData();
+    },
+
+    copyCustomerData: function() {
+
+      // update the fields with dummy data
+      if (this.ticket().customField(this.KundeID) === "" || this.ticket().customField(this.KundeID) === undefined)
+      {
+        this.ticket().customField(this.KundeID, this.CustomerList[this.currentCustomerIndex].KundeID);
+
+        // set ticket requester
+        this.ticket().requester({
+          email: this.CustomerList[this.currentCustomerIndex].epost,
+          name: this.CustomerList[this.currentCustomerIndex].Kundenavn
+        });
+      }
+
+      if (this.ticket().customField(this.Kundenavn) === "" || this.ticket().customField(this.Kundenavn) === undefined)
+      {
+        this.ticket().customField(this.Kundenavn, this.CustomerList[this.currentCustomerIndex].Kundenavn);
+      }
+
+      if (this.ticket().customField(this.Gateadresse) === "" || this.ticket().customField(this.Gateadresse) === undefined)
+      {
+        this.ticket().customField(this.Gateadresse, this.CustomerList[this.currentCustomerIndex].Gateadresse);
+      }
+
+      if (this.ticket().customField(this.Postnummer) === "" || this.ticket().customField(this.Postnummer) === undefined)
+      {
+        this.ticket().customField(this.Postnummer, this.CustomerList[this.currentCustomerIndex].Postnummer);
+      }
+
+      if (this.ticket().customField(this.Poststed) === "" || this.ticket().customField(this.Poststed) === undefined)
+      {
+        this.ticket().customField(this.Poststed, this.CustomerList[this.currentCustomerIndex].Poststed);
+      }
+
+      if (this.ticket().customField(this.epost) === "" || this.ticket().customField(this.epost) === undefined)
+      {
+        this.ticket().customField(this.epost, this.CustomerList[this.currentCustomerIndex].epost);
+      }
+
+      if (this.ticket().customField(this.Mobil) === "" || this.ticket().customField(this.Mobil) === undefined)
+      {
+        this.ticket().customField(this.Mobil, this.CustomerList[this.currentCustomerIndex].Mobil);
+      }
+
+      if (this.ticket().customField(this.Hub) === "" || this.ticket().customField(this.Hub) === undefined)
+      {
+        this.ticket().customField(this.Hub, this.CustomerList[this.currentCustomerIndex].Hub);
+      }
+
+      if (this.ticket().customField(this.Node) === "" || this.ticket().customField(this.Node) === undefined)
+      {
+        this.ticket().customField(this.Node, this.CustomerList[this.currentCustomerIndex].Node);
+      }
+
+    },
+
 
     // helper function: check to see if a particular custom field is present
     // i.e. defined and visible
@@ -198,6 +264,40 @@
       this.ticketFields(this.Mobil).disable();
       this.ticketFields(this.Hub).disable();
       this.ticketFields(this.Node).disable();
+
+      // doing it the dumb way
+      // push 2 sets of dummy data into customer list
+
+      var customerObject = {
+        "KundeID"       : this.dummyKundeID,
+        "Kundenavn"     : this.dummyKundenavn,
+        "Gateadresse"   : this.dummyGateadresse,
+        "Postnummer"    : this.dummyPostnummer,
+        "Poststed"      : this.dummyPoststed,
+        "epost"         : this.dummyepost,
+        "Mobil"         : this.dummyMobil,
+        "Hub"           : this.dummyHub,
+        "Node"          : this.dummyNode
+      };
+
+      this.CustomerList.push(customerObject);
+
+      customerObject = {
+        "KundeID"       : this.dummyKundeID2,
+        "Kundenavn"     : this.dummyKundenavn2,
+        "Gateadresse"   : this.dummyGateadresse2,
+        "Postnummer"    : this.dummyPostnummer2,
+        "Poststed"      : this.dummyPoststed2,
+        "epost"         : this.dummyepost2,
+        "Mobil"         : this.dummyMobil2,
+        "Hub"           : this.dummyHub2,
+        "Node"          : this.dummyNode2
+      };
+      this.CustomerList.push(customerObject);
+console.log('CustomerList', this.CustomerList);
+
+      // initialize index
+      this.currentCustomerIndex = 0;
 
       // this.switchTo('taskform');
     }

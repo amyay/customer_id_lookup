@@ -21,3 +21,11 @@ label {
  .help-block {
    font-size: 95%;
  }
+
+.right {
+  float: right;
+ }
+
+ .left {
+  display:inline-block;
+ }
