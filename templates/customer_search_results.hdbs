@@ -18,6 +18,8 @@
         <p class="customerCity"><b>Poststed:</b> {{customerCity}}</p>
         <p class="customerHub"><b>Hub:</b> {{customerHub}}</p>
         <p class="customerNode"><b>Node:</b> {{customerNode}}</p>
+        <p class="customerAlert"><b>Alert:</b> {{customerAlert}}</p>
+        <p class="customerNotes"><b>Notes:</b> {{customerNotes}}</p>
         <p />
       </li>
     </ul>

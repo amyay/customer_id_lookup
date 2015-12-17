@@ -11,6 +11,8 @@
     dummyMobil: '99526528',
     dummyHub: '12345',
     dummyNode: '12345',
+    dummyAlert: 'Her vises en driftsmelding',
+    dummyNotes: 'Her viser vi et notat',
 
     dummyKundeID2: '25729402',
     dummyKundenavn2: 'Dummy Person',
@@ -21,6 +23,8 @@
     dummyMobil2: '58592323334',
     dummyHub2: '33333',
     dummyNode2: '55555',
+    dummyAlert2: 'Some alert for dummy 2',
+    dummyNotes2: 'Some notes for dummy 2',
 
     dummyKundeID3: '55502228',
     dummyKundenavn3: 'John Doe',
@@ -31,6 +35,9 @@
     dummyMobil3: '7638450522',
     dummyHub3: '99999',
     dummyNode3: '88888',
+    dummyAlert3: 'Some alert for dummy 3',
+    dummyNotes3: 'Some notes for dummy 3',
+
 
 
     // global variables
@@ -110,16 +117,6 @@
 console.log ('in displaycustomerdata()');
 console.log ('currentCustomerIndex =', this.currentCustomerIndex);
 
-      this.currentcustomerID = '';
-      this.currentcustomerName = '';
-      this.currentcustomerEmail = '';
-      this.currentcustomerMobile = '';
-      this.currentcustomerStreetAddress = '';
-      this.currentcustomerZipCode = '';
-      this.currentcustomerCity = '';
-      this.currentcustomerHub = '';
-      this.currentcustomerNode = '';
-
       // display search results
       this.switchTo('customer_search_results', {
         customerID: this.CustomerList[this.currentCustomerIndex].KundeID,
@@ -131,6 +128,8 @@ console.log ('currentCustomerIndex =', this.currentCustomerIndex);
         customerCity: this.CustomerList[this.currentCustomerIndex].Poststed,
         customerHub: this.CustomerList[this.currentCustomerIndex].Hub,
         customerNode: this.CustomerList[this.currentCustomerIndex].Node,
+        customerAlert: this.CustomerList[this.currentCustomerIndex].Alert,
+        customerNotes: this.CustomerList[this.currentCustomerIndex].Notes,
         current_customer_index: this.currentCustomerIndex+1,
         number_of_results: this.CustomerList.length
       });
@@ -293,7 +292,9 @@ console.log ("in init, CustomFieldIDs: ", this.CustomFieldIDs);
         "epost"         : this.dummyepost,
         "Mobil"         : this.dummyMobil,
         "Hub"           : this.dummyHub,
-        "Node"          : this.dummyNode
+        "Node"          : this.dummyNode,
+        "Alert"         : this.dummyAlert,
+        "Notes"         : this.dummyNotes
       };
 
       this.CustomerList.push(customerObject);
@@ -307,7 +308,9 @@ console.log ("in init, CustomFieldIDs: ", this.CustomFieldIDs);
         "epost"         : this.dummyepost2,
         "Mobil"         : this.dummyMobil2,
         "Hub"           : this.dummyHub2,
-        "Node"          : this.dummyNode2
+        "Node"          : this.dummyNode2,
+        "Alert"         : this.dummyAlert2,
+        "Notes"         : this.dummyNotes2
       };
       this.CustomerList.push(customerObject);
 
@@ -320,7 +323,9 @@ console.log ("in init, CustomFieldIDs: ", this.CustomFieldIDs);
         "epost"         : this.dummyepost3,
         "Mobil"         : this.dummyMobil3,
         "Hub"           : this.dummyHub3,
-        "Node"          : this.dummyNode3
+        "Node"          : this.dummyNode3,
+        "Alert"         : this.dummyAlert3,
+        "Notes"         : this.dummyNotes3
       };
       this.CustomerList.push(customerObject);
 

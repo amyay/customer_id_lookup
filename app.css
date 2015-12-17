@@ -30,6 +30,10 @@ label {
   display:inline-block;
  }
 
+ .customerAlert {
+  color: #FF0000;
+ }
+
  button {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
